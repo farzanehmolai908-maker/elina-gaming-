@@ -1,427 +1,691 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* =========================================
+   🍄 قارچ‌خور
+   style.css
+========================================= */
 
+* {
+    box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
 }
 
 html,
 body {
-
+    margin: 0;
+    padding: 0;
     width: 100%;
     height: 100%;
-
     overflow: hidden;
 
-    background: #111;
+    font-family: Arial, Tahoma, sans-serif;
 
-    touch-action: none;
-
-    font-family: Arial, sans-serif;
+    background: #151922;
 }
 
 
-#game {
+/* =========================================
+   صفحه‌ها
+========================================= */
 
-    position: relative;
+.screen {
+    position: fixed;
+    inset: 0;
 
-    width: 100vw;
-    height: 100vh;
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 
     overflow: hidden;
+
+    z-index: 10;
 }
 
+.screen.active {
+    display: flex;
+}
+
+
+/* =========================================
+   صفحه اصلی
+========================================= */
+
+#mainMenu {
+    background:
+        linear-gradient(
+            #55c9f5,
+            #a8e77f
+        );
+
+    text-align: center;
+}
+
+.logoMushroom {
+    font-size: 85px;
+
+    filter:
+        drop-shadow(
+            0 8px 4px
+            rgba(0,0,0,.25)
+        );
+}
+
+.logo h1 {
+    margin: 0;
+
+    font-size: 52px;
+
+    color: white;
+
+    text-shadow:
+        0 5px 0 #7a351d,
+        0 8px 12px rgba(0,0,0,.3);
+}
+
+.logo p {
+    margin-top: 8px;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    color: white;
+}
+
+
+/* =========================================
+   دکمه‌های اصلی
+========================================= */
+
+.mainButtons {
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+
+    width: min(330px, 85%);
+}
+
+.mainButtons button,
+.backBtn,
+.overlay button {
+    border: none;
+
+    border-radius: 18px;
+
+    padding: 15px 25px;
+
+    font-size: 19px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            #ffffff,
+            #dcecf2
+        );
+
+    color: #293746;
+
+    box-shadow:
+        0 6px 0 #8aa1ad,
+        0 10px 18px rgba(0,0,0,.25);
+}
+
+.mainButtons button:active,
+.backBtn:active,
+.overlay button:active {
+    transform: translateY(5px);
+
+    box-shadow:
+        0 2px 0 #8aa1ad;
+}
+
+
+/* =========================================
+   متن پایین
+========================================= */
+
+.footerText {
+    margin-top: 35px;
+
+    color: white;
+
+    font-weight: bold;
+
+    font-size: 16px;
+}
+
+
+/* =========================================
+   عنوان‌ها
+========================================= */
+
+.screen h2 {
+    color: white;
+
+    font-size: 32px;
+
+    margin-bottom: 30px;
+
+    text-shadow:
+        0 4px 5px rgba(0,0,0,.35);
+}
+
+
+/* =========================================
+   انتخاب جهان
+========================================= */
+
+#worldMenu,
+#levelMenu,
+#guideMenu {
+    background:
+        linear-gradient(
+            #54c8f1,
+            #75c75e
+        );
+}
+
+.worldGrid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(130px, 180px));
+
+    gap: 18px;
+}
+
+.worldCard {
+    min-height: 140px;
+
+    border: none;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            #ffffff,
+            #dbeaf0
+        );
+
+    box-shadow:
+        0 7px 0 #78929c,
+        0 10px 20px rgba(0,0,0,.25);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+.worldCard span {
+    font-size: 45px;
+}
+
+.worldCard small {
+    color: #65737c;
+}
+
+.worldCard.locked {
+    filter: grayscale(.7);
+    opacity: .75;
+}
+
+
+/* =========================================
+   انتخاب مرحله
+========================================= */
+
+.levelGrid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 65px);
+
+    gap: 13px;
+}
+
+.levelButton {
+    width: 65px;
+    height: 65px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            #ffffff,
+            #d7edf4
+        );
+
+    font-size: 23px;
+    font-weight: bold;
+
+    box-shadow:
+        0 5px 0 #829ba5;
+
+    cursor: pointer;
+}
+
+.levelButton:active {
+    transform: translateY(4px);
+    box-shadow:
+        0 1px 0 #829ba5;
+}
+
+.levelButton.locked {
+    opacity: .45;
+}
+
+
+/* =========================================
+   راهنما
+========================================= */
+
+.guideBox {
+    width: min(500px, 88%);
+
+    padding: 20px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,.9);
+
+    color: #283641;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.2);
+}
+
+.guideBox hr {
+    border: none;
+
+    border-top:
+        2px solid #d4dce0;
+}
+
+
+/* =========================================
+   صفحه بازی
+========================================= */
+
+.gameScreen {
+    display: none !important;
+
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+.gameScreen.active {
+    display: block !important;
+}
+
+
+/* =========================================
+   Canvas
+========================================= */
 
 #gameCanvas {
-
     position: absolute;
 
-    left: 0;
-    top: 0;
+    inset: 0;
 
     width: 100%;
     height: 100%;
 
     display: block;
+
+    touch-action: none;
 }
 
 
-/* ======================================
-   HUD
-====================================== */
+/* =========================================
+   نوار اطلاعات بازی
+========================================= */
 
 #hud {
-
     position: absolute;
 
-    top: 12px;
-    left: 12px;
-    right: 12px;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    min-height: 62px;
 
     display: flex;
 
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
 
-    gap: 8px;
+    gap: 22px;
 
-    z-index: 20;
+    padding: 8px 15px;
 
-    pointer-events: none;
-}
-
-
-.hud-box {
-
-    padding: 7px 12px;
+    background:
+        rgba(35,58,70,.88);
 
     color: white;
 
-    background:
-        rgba(0, 0, 0, 0.35);
-
-    border-radius: 15px;
-
     font-size: 17px;
-
     font-weight: bold;
 
-    text-shadow:
-        2px 2px 3px black;
+    z-index: 20;
+}
+
+.hudItem {
+    white-space: nowrap;
 }
 
 
-/* ======================================
-   کنترل‌ها
-====================================== */
+/* =========================================
+   دکمه توقف
+========================================= */
 
-#controls {
+#pauseBtn {
+    position: absolute;
 
+    top: 78px;
+    right: 20px;
+
+    width: 65px;
+    height: 65px;
+
+    border-radius: 50%;
+
+    border:
+        4px solid
+        rgba(255,255,255,.75);
+
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #638ba1,
+            #31566d
+        );
+
+    color: white;
+
+    font-size: 30px;
+
+    box-shadow:
+        0 6px 0 #203b4b,
+        0 8px 15px rgba(0,0,0,.3);
+
+    z-index: 30;
+
+    cursor: pointer;
+}
+
+#pauseBtn:active {
+    transform: translateY(5px);
+
+    box-shadow:
+        0 2px 0 #203b4b;
+}
+
+
+/* =========================================
+   کنترل‌های داخل بازی
+========================================= */
+
+#gameControls {
     position: absolute;
 
     left: 0;
     right: 0;
-    bottom: 15px;
 
-    height: 155px;
+    bottom: 22px;
 
-    z-index: 30;
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-end;
+
+    padding: 0 30px;
+
+    z-index: 40;
 
     pointer-events: none;
 }
 
 
-/* دکمه‌های چپ و راست */
+/* سمت چپ */
 
-.left-buttons {
-
-    position: absolute;
-
-    left: 18px;
-    bottom: 0;
-
+.leftControls {
     display: flex;
 
-    gap: 18px;
+    gap: 15px;
 
     pointer-events: auto;
 }
 
 
-/* بخش راست */
+/* سمت راست */
 
-.right-buttons {
+.rightControls {
+    display: flex;
 
-    position: absolute;
+    flex-direction: column;
 
-    right: 18px;
-    bottom: 0;
+    gap: 15px;
 
-    width: 150px;
-    height: 155px;
-
-    pointer-events: none;
+    pointer-events: auto;
 }
 
 
-/* ======================================
-   دکمه گرد قرمز
-====================================== */
+/* =========================================
+   🎮 دکمه‌های بازی
+   سبک دایره‌ای
+========================================= */
 
-.game-button {
-
-    position: relative;
-
-    width: 88px;
-    height: 88px;
+.controlBtn {
+    width: 82px;
+    height: 82px;
 
     border-radius: 50%;
 
-    border: 5px solid
-        rgba(255,255,255,0.75);
+    border:
+        4px solid
+        rgba(255,255,255,.9);
+
+    color: white;
+
+    font-size: 39px;
+    font-weight: 900;
 
     background:
         radial-gradient(
             circle at 35% 25%,
-            #ff6d6d 0%,
-            #ed3038 35%,
-            #bd1119 70%,
-            #8b0005 100%
+            #ff7777 0%,
+            #e63138 35%,
+            #b91620 72%,
+            #810c13 100%
         );
 
     box-shadow:
-
-        0 6px 0 #700005,
-
-        inset 0 5px 8px
-        rgba(255,255,255,0.4),
-
-        inset 0 -8px 12px
-        rgba(0,0,0,0.3);
-
-    color: white;
-
-    font-size: 48px;
-
-    font-weight: bold;
+        0 7px 0 #700b10,
+        0 10px 20px rgba(0,0,0,.35);
 
     display: flex;
 
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
-    cursor: pointer;
+    touch-action: none;
 
     user-select: none;
 
-    touch-action: manipulation;
-
-    transition:
-        transform 0.08s,
-        box-shadow 0.08s;
+    cursor: pointer;
 }
 
-
-.game-button span {
-
-    text-shadow:
-        2px 3px 2px
-        rgba(0,0,0,0.45);
-}
-
-
-.game-button:active,
-.game-button.pressed {
-
+.controlBtn:active {
     transform:
-        translateY(5px)
-        scale(0.95);
+        translateY(6px)
+        scale(.94);
 
     box-shadow:
-
-        0 1px 0 #700005,
-
-        inset 0 5px 8px
-        rgba(255,255,255,0.25);
+        0 2px 0 #700b10,
+        0 4px 10px rgba(0,0,0,.3);
 }
 
 
-/* ======================================
-   پرش
-====================================== */
-
-.jump {
-
-    position: absolute;
-
-    right: 0;
-    bottom: 0;
-
-    width: 112px;
-    height: 112px;
-
-    font-size: 65px;
-}
-
-
-/* ======================================
-   تیر
-====================================== */
+/* =========================================
+   دکمه شلیک
+========================================= */
 
 .shoot {
+    font-size: 32px;
+}
 
-    position: absolute;
 
-    right: 28px;
-    bottom: 108px;
+/* =========================================
+   دکمه پرش
+========================================= */
 
-    width: 82px;
-    height: 82px;
-
+.jump {
     font-size: 42px;
 }
 
 
-/* ======================================
-   پنجره‌ها
-====================================== */
+/* =========================================
+   Overlay
+========================================= */
 
 .overlay {
-
-    position: absolute;
-
-    inset: 0;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
     background:
-        rgba(0,0,0,0.6);
+        rgba(15,25,35,.88);
 
     z-index: 100;
 }
 
-
-.hidden {
-
-    display: none !important;
-}
-
-
-.panel {
-
-    width: min(90%, 400px);
-
-    padding: 30px;
-
-    text-align: center;
-
-    background: white;
-
-    border-radius: 25px;
-
-    box-shadow:
-        0 15px 45px
-        rgba(0,0,0,0.5);
-}
-
-
-.panel h1 {
-
+.overlay h2 {
     margin-bottom: 15px;
-
-    color: #222;
 }
 
-
-.panel p {
-
-    margin-bottom: 20px;
-
-    color: #444;
-
-    font-size: 18px;
-}
-
-
-.panel button {
-
-    padding: 14px 30px;
-
-    border: none;
-
-    border-radius: 14px;
-
-    background: #20a83a;
-
+.overlay p {
     color: white;
 
-    font-size: 18px;
-
-    font-weight: bold;
+    font-size: 20px;
 }
 
 
-/* ======================================
+/* =========================================
    موبایل
-====================================== */
+========================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
 
     #hud {
+        gap: 12px;
 
-        top: 8px;
-        left: 7px;
-        right: 7px;
+        font-size: 14px;
 
-        gap: 4px;
+        min-height: 58px;
     }
 
+    #pauseBtn {
+        top: 72px;
+        right: 15px;
 
-    .hud-box {
+        width: 60px;
+        height: 60px;
+    }
 
-        padding: 5px 7px;
+    #gameControls {
+        bottom: 18px;
+
+        padding: 0 28px;
+    }
+
+    .controlBtn {
+        width: 76px;
+        height: 76px;
+
+        font-size: 36px;
+    }
+
+    .rightControls {
+        gap: 12px;
+    }
+}
+
+
+/* =========================================
+   گوشی کوچک
+========================================= */
+
+@media (max-width: 380px) {
+
+    #gameControls {
+        padding: 0 14px;
+    }
+
+    .leftControls {
+        gap: 8px;
+    }
+
+    .controlBtn {
+        width: 64px;
+        height: 64px;
+
+        font-size: 30px;
+    }
+
+    #hud {
+        gap: 7px;
 
         font-size: 12px;
     }
+}
 
 
-    #controls {
+/* =========================================
+   حالت افقی موبایل
+========================================= */
 
+@media (orientation: landscape)
+       and (max-height: 500px) {
+
+    #gameControls {
         bottom: 10px;
-
-        height: 135px;
     }
 
-
-    .left-buttons {
-
-        left: 10px;
-
-        gap: 10px;
+    .controlBtn {
+        width: 65px;
+        height: 65px;
     }
 
+    #hud {
+        min-height: 48px;
 
-    .game-button {
-
-        width: 72px;
-        height: 72px;
-
-        font-size: 38px;
-
-        border-width: 4px;
+        font-size: 13px;
     }
 
+    #pauseBtn {
+        top: 58px;
 
-    .right-buttons {
+        width: 52px;
+        height: 52px;
 
-        right: 10px;
-
-        width: 125px;
-        height: 135px;
-    }
-
-
-    .jump {
-
-        width: 96px;
-        height: 96px;
-
-        font-size: 54px;
-    }
-
-
-    .shoot {
-
-        width: 72px;
-        height: 72px;
-
-        right: 18px;
-        bottom: 90px;
-
-        font-size: 34px;
+        font-size: 24px;
     }
 }
