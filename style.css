@@ -1,0 +1,427 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #111;
+
+    touch-action: none;
+
+    font-family: Arial, sans-serif;
+}
+
+
+#game {
+
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+}
+
+
+#gameCanvas {
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+}
+
+
+/* ======================================
+   HUD
+====================================== */
+
+#hud {
+
+    position: absolute;
+
+    top: 12px;
+    left: 12px;
+    right: 12px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 8px;
+
+    z-index: 20;
+
+    pointer-events: none;
+}
+
+
+.hud-box {
+
+    padding: 7px 12px;
+
+    color: white;
+
+    background:
+        rgba(0, 0, 0, 0.35);
+
+    border-radius: 15px;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    text-shadow:
+        2px 2px 3px black;
+}
+
+
+/* ======================================
+   کنترل‌ها
+====================================== */
+
+#controls {
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 15px;
+
+    height: 155px;
+
+    z-index: 30;
+
+    pointer-events: none;
+}
+
+
+/* دکمه‌های چپ و راست */
+
+.left-buttons {
+
+    position: absolute;
+
+    left: 18px;
+    bottom: 0;
+
+    display: flex;
+
+    gap: 18px;
+
+    pointer-events: auto;
+}
+
+
+/* بخش راست */
+
+.right-buttons {
+
+    position: absolute;
+
+    right: 18px;
+    bottom: 0;
+
+    width: 150px;
+    height: 155px;
+
+    pointer-events: none;
+}
+
+
+/* ======================================
+   دکمه گرد قرمز
+====================================== */
+
+.game-button {
+
+    position: relative;
+
+    width: 88px;
+    height: 88px;
+
+    border-radius: 50%;
+
+    border: 5px solid
+        rgba(255,255,255,0.75);
+
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #ff6d6d 0%,
+            #ed3038 35%,
+            #bd1119 70%,
+            #8b0005 100%
+        );
+
+    box-shadow:
+
+        0 6px 0 #700005,
+
+        inset 0 5px 8px
+        rgba(255,255,255,0.4),
+
+        inset 0 -8px 12px
+        rgba(0,0,0,0.3);
+
+    color: white;
+
+    font-size: 48px;
+
+    font-weight: bold;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    touch-action: manipulation;
+
+    transition:
+        transform 0.08s,
+        box-shadow 0.08s;
+}
+
+
+.game-button span {
+
+    text-shadow:
+        2px 3px 2px
+        rgba(0,0,0,0.45);
+}
+
+
+.game-button:active,
+.game-button.pressed {
+
+    transform:
+        translateY(5px)
+        scale(0.95);
+
+    box-shadow:
+
+        0 1px 0 #700005,
+
+        inset 0 5px 8px
+        rgba(255,255,255,0.25);
+}
+
+
+/* ======================================
+   پرش
+====================================== */
+
+.jump {
+
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 112px;
+    height: 112px;
+
+    font-size: 65px;
+}
+
+
+/* ======================================
+   تیر
+====================================== */
+
+.shoot {
+
+    position: absolute;
+
+    right: 28px;
+    bottom: 108px;
+
+    width: 82px;
+    height: 82px;
+
+    font-size: 42px;
+}
+
+
+/* ======================================
+   پنجره‌ها
+====================================== */
+
+.overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background:
+        rgba(0,0,0,0.6);
+
+    z-index: 100;
+}
+
+
+.hidden {
+
+    display: none !important;
+}
+
+
+.panel {
+
+    width: min(90%, 400px);
+
+    padding: 30px;
+
+    text-align: center;
+
+    background: white;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,0,0,0.5);
+}
+
+
+.panel h1 {
+
+    margin-bottom: 15px;
+
+    color: #222;
+}
+
+
+.panel p {
+
+    margin-bottom: 20px;
+
+    color: #444;
+
+    font-size: 18px;
+}
+
+
+.panel button {
+
+    padding: 14px 30px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: #20a83a;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+}
+
+
+/* ======================================
+   موبایل
+====================================== */
+
+@media (max-width: 700px) {
+
+    #hud {
+
+        top: 8px;
+        left: 7px;
+        right: 7px;
+
+        gap: 4px;
+    }
+
+
+    .hud-box {
+
+        padding: 5px 7px;
+
+        font-size: 12px;
+    }
+
+
+    #controls {
+
+        bottom: 10px;
+
+        height: 135px;
+    }
+
+
+    .left-buttons {
+
+        left: 10px;
+
+        gap: 10px;
+    }
+
+
+    .game-button {
+
+        width: 72px;
+        height: 72px;
+
+        font-size: 38px;
+
+        border-width: 4px;
+    }
+
+
+    .right-buttons {
+
+        right: 10px;
+
+        width: 125px;
+        height: 135px;
+    }
+
+
+    .jump {
+
+        width: 96px;
+        height: 96px;
+
+        font-size: 54px;
+    }
+
+
+    .shoot {
+
+        width: 72px;
+        height: 72px;
+
+        right: 18px;
+        bottom: 90px;
+
+        font-size: 34px;
+    }
+}
