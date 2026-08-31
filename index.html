@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
+    <title>ماجراجویی دخترک</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="game">
+
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- اطلاعات بالای بازی -->
+    <div id="hud">
+
+        <div class="hud-box">
+            ❤️ <span id="lives">3</span>
+        </div>
+
+        <div class="hud-box">
+            🪙 <span id="coins">0</span>
+        </div>
+
+        <div class="hud-box">
+            ⭐ <span id="score">0</span>
+        </div>
+
+        <div class="hud-box">
+            دنیا <span id="world">1</span>
+            -
+            مرحله <span id="level">1</span>
+        </div>
+
+    </div>
+
+
+    <!-- کنترل‌های بازی -->
+    <div id="controls">
+
+        <div class="left-buttons">
+
+            <button
+                id="leftBtn"
+                class="game-button">
+                <span>◀</span>
+            </button>
+
+            <button
+                id="rightBtn"
+                class="game-button">
+                <span>▶</span>
+            </button>
+
+        </div>
+
+
+        <div class="right-buttons">
+
+            <button
+                id="shootBtn"
+                class="game-button shoot">
+                <span>●</span>
+            </button>
+
+            <button
+                id="jumpBtn"
+                class="game-button jump">
+                <span>▲</span>
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- صفحه پایان مرحله -->
+    <div id="levelComplete" class="overlay hidden">
+
+        <div class="panel">
+
+            <h1>🎉 مرحله تمام شد!</h1>
+
+            <p id="resultText">
+                آفرین!
+            </p>
+
+            <button id="nextBtn">
+                مرحله بعد
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- صفحه باخت -->
+    <div id="gameOver" class="overlay hidden">
+
+        <div class="panel">
+
+            <h1>💔 باختی!</h1>
+
+            <p>
+                دوباره امتحان کن.
+            </p>
+
+            <button id="restartBtn">
+                تلاش دوباره
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="game.js"></script>
+
+</body>
+</html>
